@@ -11,7 +11,7 @@
 .editor-bar button.secondary{background:#e7f2e9}.editor-bar label input{display:none}.editor-status{flex:1 1 170px;font-size:11px;color:#e4efe4}
 .editor-on [data-text-edit]{outline:1px dashed #be865a;outline-offset:3px;cursor:text;min-height:1em}
 .editor-on [data-text-edit]:focus{outline:3px solid #ca7a53;background:#fff8e9;color:#244b40;border-radius:3px}
-.editor-on a{pointer-events:none}.editor-on .editor-bar{pointer-events:auto}.editor-on .editor-bar *{pointer-events:auto}
+.editor-on a{pointer-events:auto}.editor-on .editor-bar{pointer-events:auto}.editor-on .editor-bar *{pointer-events:auto}
 @media(max-width:600px){.editor-bar{bottom:7px;left:7px;right:7px;padding:10px;gap:5px}.editor-bar button,.editor-bar label{font-size:10px;padding:7px 9px}}
 </style></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="#home"><span class="arahet-logo" aria-hidden="true"><svg viewBox="0 0 648 648" xmlns="http://www.w3.org/2000/svg"><g fill="#204d49"><path d="M323 305L71 529 121 576 249 432 252 435 167 609 231 635 291 462 299 450 288 647 359 647 348 450 362 479 415 635 479 607 399 445 398 432 526 576 576 526Z"/><path d="M119 71L71 120 232 261 260 230Z"/><path d="M288 0L302 212 345 215 359 0Z"/><path d="M0 288L0 359 215 345 215 302Z"/><path d="M647 288L433 302 433 345 646 359Z"/></g><path d="M528 70L386 231 416 262 577 120Z" fill="#00B49F"/></svg></span><span class="brand-word">ԱՐԱՀԵՏ <span>· AGRO CAMP</span></span></a><nav class="topnav"><a href="#experiences">Փորձառություններ</a><a href="#program">Ծրագիր</a><a href="#parents">Ծնողներին</a><a href="#registration" class="btn">Նախագրանցում ↗</a></nav></div></header>
@@ -32,7 +32,7 @@
 'use strict';
 const STORAGE='arahet-vernashen-parent-copy-v1';
 const elements=[];
-const selectors='h1,h2,h3,p,li,summary,.kicker,.over,.chips span,.brand-word,.topnav a,.btn,.pending,.price strong,.price small,.step-num,.step-status,.registration-small,footer,.brand';
+const selectors='h1,h2,h3,p,li,summary,.kicker,.over,.chips span,.brand-word,.topnav a,.btn,.pending,.price strong,.price small,.step-num,.step-status,.registration-small,footer';
 const nodes=[...document.querySelectorAll(selectors)].filter(el=>!el.closest('.editor-bar,.edit-trigger'));
 nodes.forEach((el,index)=>{if(nodes.some(other=>other!==el&&other.contains(el)))return;const key='text-'+index;el.dataset.textEdit=key;elements.push(el)});
 const originals=Object.fromEntries(elements.map(el=>[el.dataset.textEdit,el.innerHTML]));
