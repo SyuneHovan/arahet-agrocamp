@@ -14,6 +14,7 @@
 .editor-on a{pointer-events:auto}.editor-on .editor-bar{pointer-events:auto}.editor-on .editor-bar *{pointer-events:auto}
 @media(max-width:600px){.editor-bar{bottom:7px;left:7px;right:7px;padding:10px;gap:5px}.editor-bar button,.editor-bar label{font-size:10px;padding:7px 9px}}
 .hero .chips .info-chip .chip-label{background:transparent!important;padding:0!important;border-radius:0!important}@media(max-width:760px){.hero .chips{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.hero .info-chip{padding:11px 12px;min-height:60px}.hero .chip-label{font-size:12px}}@media(max-width:430px){.hero .chips{grid-template-columns:1fr;gap:9px}.hero .info-chip{min-height:51px;padding:10px 15px}.hero .info-chip-price{grid-column:auto;justify-content:flex-start}.hero .chip-label{font-size:13px}}
+.hero .chips .info-chip{position:relative;isolation:isolate;overflow:hidden}.hero .chips .info-chip>.chip-icon,.hero .chips .info-chip>.chip-label{position:static!important;transform:none!important;display:flex;align-items:center;background:none!important;border:0!important;box-shadow:none!important;margin:0!important;width:auto;height:auto}.hero .chips .info-chip>.chip-label{flex:1;font-size:13px;white-space:normal}.hero .chips .info-chip>.chip-icon{flex:0 0 28px;justify-content:center}.hero .chips .info-chip-price{grid-column:1/-1}@media(max-width:430px){.hero .chips .info-chip{min-height:55px}}
 </style></head><body>
 <header class="top"><div class="wrap"><a class="brand" href="#home"><span class="arahet-logo" aria-hidden="true"><svg viewBox="0 0 648 648" xmlns="http://www.w3.org/2000/svg"><g fill="#204d49"><path d="M323 305L71 529 121 576 249 432 252 435 167 609 231 635 291 462 299 450 288 647 359 647 348 450 362 479 415 635 479 607 399 445 398 432 526 576 576 526Z"/><path d="M119 71L71 120 232 261 260 230Z"/><path d="M288 0L302 212 345 215 359 0Z"/><path d="M0 288L0 359 215 345 215 302Z"/><path d="M647 288L433 302 433 345 646 359Z"/></g><path d="M528 70L386 231 416 262 577 120Z" fill="#00B49F"/></svg></span><span class="brand-word">ԱՐԱՀԵՏ <span>· AGRO CAMP</span></span></a><nav class="topnav"><a href="#experiences">Փորձառություններ</a><a href="#program">Ծրագիր</a><a href="#parents">Ծնողներին</a><a href="https://docs.google.com/forms/d/e/1FAIpQLSdWCgXfamY8qnL8Itj7SleeNze_H79kD6gwEw64TY1_T4K1zw/viewform" target="_blank" rel="noopener noreferrer" class="btn">Գրանցում ↗</a></nav></div></header>
 <main><div class="hero" id="home"><div class="wrap"><div><div class="over">27–29 ՀՈԿՏԵՄԲԵՐ · ՎԵՐՆԱՇԵՆ</div><h1>3 օր<br><em>ուրիշ</em><br>կյանքում</h1><p>Քաղաքից՝ գյուղ։ Հացթխում, բնություն, արշավ, ջերմ երեկոներ ու նոր ընկերներ։ Իրական փորձառություններ՝ սեփական ձեռքերով։</p><div class="chips" aria-label="Ճամբարի հիմնական տվյալները">
@@ -38,9 +39,9 @@
 'use strict';
 const STORAGE='arahet-vernashen-parent-copy-v1';
 const elements=[];
-const selectors='h1,h2,h3,p,li,summary,.kicker,.over,.chips span,.brand-word,.topnav a,.btn,.pending,.price strong,.price small,.step-num,.step-status,.registration-small,footer';
+const selectors='h1,h2,h3,p,li,summary,.kicker,.over,.chips span,.brand-word,.topnav a,.btn,.pending,.price strong,.price small,.step-num,.step-status,.registration-small,footer'; // Preserve indices for preexisting local edits; chips are excluded below.
 const nodes=[...document.querySelectorAll(selectors)].filter(el=>!el.closest('.editor-bar,.edit-trigger'));
-nodes.forEach((el,index)=>{if(nodes.some(other=>other!==el&&other.contains(el)))return;const key='text-'+index;el.dataset.textEdit=key;elements.push(el)});
+nodes.forEach((el,index)=>{if(el.closest('.chips'))return; if(nodes.some(other=>other!==el&&other.contains(el)))return;const key='text-'+index;el.dataset.textEdit=key;elements.push(el)});
 const originals=Object.fromEntries(elements.map(el=>[el.dataset.textEdit,el.innerHTML]));
 let edits={};
 try{edits=JSON.parse(localStorage.getItem(STORAGE)||'{}')||{}}catch(e){edits={}}
