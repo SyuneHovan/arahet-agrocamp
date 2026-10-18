@@ -59,7 +59,7 @@ const STORAGE='arahet-vernashen-parent-copy-v1';
 const elements=[];
 const selectors='h1,h2,h3,p,li,summary,.kicker,.over,.chips span,.brand-word,.topnav a,.btn,.pending,.price strong,.price small,.step-num,.step-status,.registration-small,footer'; // Preserve indices for preexisting local edits; chips are excluded below.
 const nodes=[...document.querySelectorAll(selectors)].filter(el=>!el.closest('.editor-bar,.edit-trigger'));
-nodes.forEach((el,index)=>{if(el.closest('.chips'))return; if(nodes.some(other=>other!==el&&other.contains(el)))return;const key=el.matches('.hero h1')?'hero-title-punctuation-v2':'text-'+index;el.dataset.textEdit=key;elements.push(el)});
+nodes.forEach((el,index)=>{if(el.closest('.chips')||el.closest('#cancellation'))return; if(nodes.some(other=>other!==el&&other.contains(el)))return;const key=el.matches('.hero h1')?'hero-title-punctuation-v2':'text-'+index;el.dataset.textEdit=key;elements.push(el)});
 const originals=Object.fromEntries(elements.map(el=>[el.dataset.textEdit,el.innerHTML]));
 let edits={};
 try{edits=JSON.parse(localStorage.getItem(STORAGE)||'{}')||{}}catch(e){edits={}}
